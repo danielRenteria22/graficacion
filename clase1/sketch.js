@@ -4,8 +4,8 @@ var ancho;
 function setup() {
   // put setup code here
   createCanvas(600, 400);
-  ancho = 30;
-  vel = new p5.Vector(2,0);
+  ancho = 60;
+  vel = new p5.Vector(2,2);
   //                  {           x       }{           y          }
   pos = new p5.Vector(width / 2 - ancho / 2,height / 2 - ancho / 2);
 }
@@ -18,9 +18,21 @@ function draw() {
   
   pos.add(vel);
   rect(pos.x, pos.y, ancho, ancho);
+  
+  //Por los lados
   if(pos.x - ancho/2 >= width){
     pos.x = - ancho;
+  } else if(pos.x + ancho <= 0){
+    pos.x = width;
   }
+
+  //Por arriiba y abajo
+  if(pos.y + ancho <= 0){
+    pos.y = height;
+  } else if(pos.y - ancho >= height){
+    pos.y = -ancho;
+  }
+
 }
 
 function keyPressed(){
