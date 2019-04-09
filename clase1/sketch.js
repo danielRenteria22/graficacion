@@ -1,16 +1,13 @@
-var velX;
-var velY;
-var x,y;
+var vel;
+var pos;
 var ancho;
 function setup() {
   // put setup code here
   createCanvas(600, 400);
-  velX = 2;
-  velY = 0;
   ancho = 30;
-  x = width / 2 - ancho / 2;
-  y = height / 2 - ancho / 2;
-    
+  vel = new p5.Vector(2,0);
+  //                  {           x       }{           y          }
+  pos = new p5.Vector(width / 2 - ancho / 2,height / 2 - ancho / 2);
 }
 
 function draw() {
@@ -18,12 +15,26 @@ function draw() {
   background(51);
   fill(255);
   noStroke();
-  x += velX;
-  y += velY;
-  rect(x, y, ancho, ancho);
-
-  if(x - ancho/2 >= width){
-    x = 0;
+  
+  pos.add(vel);
+  rect(pos.x, pos.y, ancho, ancho);
+  if(pos.x - ancho/2 >= width){
+    pos.x = - ancho;
   }
+}
 
+function keyPressed(){
+  if(keyCode == UP_ARROW){
+    vel.x = 0;
+    vel.y = -2;
+  } else if(keyCode == DOWN_ARROW){
+    vel.x = 0;
+    vel.y = 2;
+  } else if(keyCode == LEFT_ARROW){
+    vel.x = -2;
+    vel.y = 0;
+  } else if(keyCode == RIGHT_ARROW){
+    vel.x = 2;
+    vel.y = 0;
+  }
 }
